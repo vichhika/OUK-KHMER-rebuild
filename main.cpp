@@ -176,12 +176,12 @@ void chessBoard(QWidget *baseWidget, Krorla *tile[8][8])
 
 void findWinner(int check_king){
 
-    if(check_king == 1){
+    if(check_king == 2){
         tempwinner->setGeometry(-15,y/2+260,436,123);
         tempWinner->start();
         tempwinner->setMovie(tempWinner);
         turn = 3;
-    }else if(check_king == 2){
+    }else if(check_king == 1){
         tempwinner->setGeometry(x-421,y/2+260,436,123);
         tempWinner->start();
         tempwinner->setMovie(tempWinner);        

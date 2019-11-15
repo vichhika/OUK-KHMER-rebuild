@@ -5,17 +5,19 @@
 #include <QDebug>
 #include <QMovie>
 
-int count=0,turn=0,way[60],max=0,check_king = 0,winSound = 0;//FOR VALIDATION
+int count=0,turn=1,way[60],max=0,check_king = 0,winSound = 0;//FOR VALIDATION
 Krorla *konDerm;//CHANGE OBJECT
 QLabel *tempTurn;
 QLabel *tempwinner;
+QLabel *tempsound;
 QMovie *tempWinner;
 QWidget *tempWiget;
 MainWindow *tempUI;
 Krorla *tile[8][8];
-extern Sound *soundChess;
+Sound *soundChess = new Sound();
 int x = 1366;
 int y = 552;
+extern void Turn(QLabel * baseLabel);
 class Border
 {
 public:
@@ -42,8 +44,8 @@ void accessories(QWidget *baseWidget)
     QLabel *player2 = new QLabel(baseWidget);
     accessory *home = new accessory(baseWidget);
     accessory *restart = new accessory(baseWidget);
+    accessory *sound = new accessory(baseWidget);
     QLabel *turnText[2];
-    QLabel *white = new QLabel(baseWidget);
 
     turnText[0] =  new QLabel(baseWidget);
     turnText[1] =  new QLabel(baseWidget);
@@ -55,11 +57,6 @@ void accessories(QWidget *baseWidget)
     turnText[1]->setGeometry(x-2*(x/8 + 25),552/2,240,70);
     turnText[1]->setPixmap(QPixmap(":/Image/turn.png"));
 
-    white->setGeometry(0,y/2+260,x,123);
-    white->setStyleSheet("QLabel {background-color: White;}");
-
-
-
     home->numButton = 0;
     home->setCursor(mouse::get2());
     home->setGeometry(20,20,74,74);
@@ -70,6 +67,16 @@ void accessories(QWidget *baseWidget)
     restart->setCursor(mouse::get2());
     restart->setGeometry(110,20,78,78);
     restart->setStyleSheet("QLabel {border-image: url(:/Image/restart.png);}:hover{border-image:url(:Image/restart.png);border-width:-10%;}");
+
+    sound->numButton = 2;
+    sound->setCursor(mouse::get2());
+    sound->setGeometry(x-190,20,78,78);
+    sound->setStyleSheet("QLabel {border-image: url(:/Image/sound.png);}:hover{border-image:url(:Image/sound.png);border-width:-10%;}");
+
+    tempsound = new QLabel(baseWidget);
+    tempsound->setGeometry(x-90,25,64,64);
+    if(soundChess->turn == 1) tempsound->setPixmap(QPixmap(":/Image/switch-on-icon.png"));
+    else tempsound->setPixmap(QPixmap(":/Image/switch-off-icon.png"));
 
     moves->setGeometry(0,0,1366,768);
     moves->setStyleSheet("QLabel {border-image: url(:/Image/background.jpg);}");
@@ -169,8 +176,9 @@ void chessBoard(QWidget *baseWidget, Krorla *tile[8][8])
     tile[7][7]->display('R');//tuk
     }
 
-    tempTurn->setGeometry(x/8 + 50,y/2 + 80,100,100);
-    tempTurn->setStyleSheet("QLabel {border-image: url(:/Image/king_black.png);}");
+    //tempTurn->setGeometry(x/8 + 50,y/2 + 80,100,100);
+    Turn(tempTurn);
+    //tempTurn->setStyleSheet("QLabel {border-image: url(:/Image/king_white.png);}");
 
 }
 
@@ -207,7 +215,7 @@ void findKing(){
 }
 
 void gotoRestart(){
-    count=0;turn=0;max=0;check_king=0;winSound = 0;
+    count=0;turn=1;max=0;check_king=0;winSound = 0;
     int i,j,k=0,hor,ver;
 
     ver=((768/2)-(512/2));
@@ -278,9 +286,9 @@ void gotoRestart(){
     tile[7][6]->display('H');
     tile[7][7]->display('R');
     }
-
-    tempTurn->setGeometry(x/8 + 50,y/2 + 80,100,100);
-    tempTurn->setStyleSheet("QLabel {border-image: url(:/Image/king_black.png);}");
+    Turn(tempTurn);
+    //tempTurn->setGeometry(x/8 + 50,y/2 + 80,100,100);
+   // tempTurn->setStyleSheet("QLabel {border-image: url(:/Image/king_white.png);}");
     tempwinner->clear();
 }
 
@@ -288,6 +296,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
+    w.setWindowTitle("OUK-KHMER");
     QWidget *myWidget = new QWidget();
     tempUI = &w;
     tempWiget = myWidget; //extern to global
@@ -303,7 +312,10 @@ int main(int argc, char *argv[])
     w.setMinimumSize(QSize(854,580));
     w.show();
     myWidget->setCursor(mouse::get1());
-    myWidget->showFullScreen();
+    myWidget->setFixedSize(x,728);
+    myWidget->setGeometry(0,0,x,728);
+    myWidget->setWindowTitle("OUK-KHMER");
+    myWidget->setWindowIcon(QIcon(":/Image/Chess.png"));
     myWidget->close();
    // myWidget->show();
 

@@ -7,7 +7,7 @@ music::music()
 void music::music_play(){
     this->soundtrack.play();
     this->soundtrack.setLoop(true);
-    this->soundtrack.setVolume(10);
+    this->soundtrack.setVolume(50);
     //this->soundtrack.play();
 }
 void music::music_pause(){

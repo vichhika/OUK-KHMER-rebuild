@@ -56,5 +56,10 @@
         <file>wait.cpp</file>
         <file>wait.h</file>
         <file>Image/home.png</file>
+        <file>Image/chess_PUd_icon.ico</file>
+        <file>Image/Chess.png</file>
+        <file>Image/sound.png</file>
+        <file>Image/switch-off-icon.png</file>
+        <file>Image/switch-on-icon.png</file>
     </qresource>
 </RCC>

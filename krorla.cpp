@@ -11,7 +11,7 @@ extern Krorla *konDerm;
 extern Krorla *tile[8][8];
 
 oukpieceway *valid = new oukpieceway();
-Sound *soundChess = new Sound();
+extern Sound *soundChess;
 
 void validate(Krorla *temp,int c);
 void closeWay();

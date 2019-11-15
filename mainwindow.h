@@ -38,7 +38,7 @@ public:
 
 
 public:
-    Sound click;
+    //Sound click;
     music play;
     QTimer *timer;
     QMovie *movie;

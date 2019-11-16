@@ -146,6 +146,8 @@ void validate(Krorla *temp, int c) // c = ++count //tile temp = this
                 konDerm->displayKrorla();//reset​ color ក្រឡារអុក
                 temp->displayKrorla();//reset​ color ក្រឡារអុក
                 konDerm->pieceName = 'Z'; //ការពារ win lose ពេលដើរផ្លួវចាស់របស់ king
+                if(konDerm->pieceName == 'Z' && turn == 1) tempWiget->cursor().setPos(x/8 +115,y/2 + 210);
+                else if(konDerm->pieceName == 'Z' && turn == 0) tempWiget->cursor().setPos(x+65 - 2*(x/8),y/2 + 210);
                 retValue=0;// improve valid->check();
 
                 closeWay(); //remove orange way
@@ -190,6 +192,7 @@ void closeWay()
 void Turn(QLabel * baseLabel){
 
     if(turn == 1){
+
         baseLabel->setGeometry(x - 2*(x/8),y/2 + 80,100,100);
         baseLabel->setStyleSheet("QLabel {border-image: url(:/Image/king_white.png);}");
     }
